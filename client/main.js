@@ -1,22 +1,21 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import '../lib/collections.js';
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
-
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
+Template.addprofile.events({
+	'click .js-savebtn'(event, instance){
+		var fName = $("#exampleModal input[name='firstName']").val();
+		var lName = $("#exampleModal input[name='lastName']").val();
+		var pName = $("#exampleModal input[name='projectName']").val();
+		console.log( "The first name is",fName);
+		console.log( "The first name is",lName);
+		console.log( "The first name is",pName);
+		 $("#exampleModal input[name='firstName']").val("");
+		 $("#exampleModal input[name='lastName']").val("");
+		 $("#exampleModal input[name='projectName']").val("");
+		$("#exampleModal").modal("hide");
+ 
+	}
 });
