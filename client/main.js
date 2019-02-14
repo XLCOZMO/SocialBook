@@ -4,6 +4,12 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import '../lib/collections.js';
 import './main.html';
 
+ Template.Profile.helpers({
+ 	proffName(){
+ 		return userDB.findOne({}).firstName;
+ 	}
+ });
+
 Template.addprofile.events({
 	'click .js-savebtn'(event, instance){
 		var fName = $("#exampleModal input[name='firstName']").val();
@@ -16,6 +22,8 @@ Template.addprofile.events({
 		 $("#exampleModal input[name='lastName']").val("");
 		 $("#exampleModal input[name='projectName']").val("");
 		$("#exampleModal").modal("hide");
+		userDB.insert({'firstName':fName, 'lastName': lName, 'projectName':pName});
  
-	}
+	}   
+	   
 });
