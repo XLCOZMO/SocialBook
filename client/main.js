@@ -30,6 +30,29 @@ Template.addprofile.events({
 });
 
 Template.Profile.events({
+	'click .js-like'(event, instance){
+		console.log("You clicked like");
+		var profId = this._id;
+		var numLikes = userDB.findOne({_id: profId}).like;
+		if(!numLikes){
+			numLikes = 0;
+		}
+		numLikes = numLikes + 1;
+		console.log("You Have",numLikes);
+
+		userDB.update({_id:profId}, {$set:{'like':numLikes}});
+	},
+	'click .js-dislike'(event,instance){
+		 console.log("You clicked like");
+		var profId = this._id;
+		var numdislikes = userDB.findOne({_id: profId}).dislikes;
+		if(!numdislikes){
+			numdislikes = 0;
+		}
+		numdislikes = numdislikes + 1;
+		console.log("You Have",numdislikes);
+		userDB.update({_id:profId}, {$set:{'dislikes':numdislikes}});
+	},
 	'click .js-delete'(event,instance){
 		var profId = this._id;
 		$('#'+ profId).fadeOut('slow',function(){
