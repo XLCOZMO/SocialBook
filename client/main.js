@@ -30,6 +30,14 @@ Template.addprofile.events({
 });
 
 Template.Profile.events({
+	'click .js-info'(event,instance){
+		var uId = this._id;		
+		$('#viewUser input').val(uId);
+		$('#viewUser img').attr("src", userDB.findOne({_id: uId}).projectName);
+		$('#editModal').modal('show');
+
+
+	},
 	'click .js-like'(event, instance){
 		console.log("You clicked like");
 		var profId = this._id;
